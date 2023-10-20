@@ -14,6 +14,7 @@ export default class MainSlider extends Slider {
             this.slideIndex = this.slides.length;
         }
 
+        // pop-up window with teacher (#3 slide)
         try {
             this.hanson.style.opacity = '0';
 
@@ -27,9 +28,7 @@ export default class MainSlider extends Slider {
             } else {
                 this.hanson.classList.remove('slideInUp');
             }
-
         } catch (e) { }
-
 
         [...this.slides].forEach(slide => {
             slide.style.display = 'none';
@@ -44,10 +43,24 @@ export default class MainSlider extends Slider {
         this.showSlides(this.slideIndex += n);
     }
 
+    // linksFromMiniSlider() {
+    //     const links = this.container.querySelectorAll('.card');
+
+    //     links.forEach(link => {
+    //         link.addEventListener('click', () => {
+
+    //             this.slideIndex = +document.location.hash[1];
+    //             console.log(this.slideIndex);
+    //             this.showSlides(this.slideIndex);
+    //         });
+    //     });
+    // }
+
     bindTriggers() {
         this.btns.forEach(btn => {
             btn.addEventListener('click', () => {
                 this.plusSlides(1);
+
             });
 
             btn.parentNode.previousElementSibling.addEventListener('click', (e) => {
@@ -59,10 +72,19 @@ export default class MainSlider extends Slider {
             });
         });
 
+        let slidesCounter = document.querySelectorAll('.prevmodule').length;
+
         document.querySelectorAll('.prevmodule').forEach(item => {
+            item.setAttribute('href', `#${slidesCounter}`);
+            slidesCounter--;
+            console.log(item);
+        });
+
+        document.querySelectorAll('.prevmodule').forEach((item, i) => {
             item.addEventListener('click', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
+
                 this.plusSlides(-1);
             });
         });
@@ -85,6 +107,7 @@ export default class MainSlider extends Slider {
 
             this.showSlides(this.slideIndex);
             this.bindTriggers();
+            //this.linksFromMiniSlider();
         }
     }
 }

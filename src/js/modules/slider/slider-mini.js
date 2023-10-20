@@ -56,6 +56,7 @@ export default class MiniSlider extends Slider {
                 this.container.insertBefore(this.slides[this.slides.length - 3], this.slides[0]);
             } else {
                 this.container.insertBefore(this.slides[this.slides.length - 1], this.slides[0]);
+
             }
             this.decorizeSlides();
         });
